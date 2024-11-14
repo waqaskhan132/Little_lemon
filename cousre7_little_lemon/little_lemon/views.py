@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view,permission_classes
  
  # booking view 
 class bookingview(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     # one way to do that
     def get(self, request):
         item= Booking_table.objects.all()
@@ -18,6 +19,7 @@ class bookingview(APIView):
         return Response(serilize.data)
         
     def post(self , request):
+       
         serlize= booking_tableSerilizer(data=request.data)
         if serlize.is_valid():
             serlize.save()
@@ -28,6 +30,7 @@ class menuview(generics.ListCreateAPIView):
     
     queryset = Menu_table.objects.all()
     serializer_class = menu_tableSerilizer
+    permission_classes = [permissions.IsAuthenticated]
     '''def get(self,request):
         menu=Menu_table.objects.all()
         serlize= menu_tableSerilizer(menu, many=True)
@@ -42,6 +45,7 @@ class menuview(generics.ListCreateAPIView):
 class menusingleview(generics.UpdateAPIView,generics.DestroyAPIView,generics.ListAPIView):
     queryset = Menu_table.objects.all()
     serializer_class = menu_tableSerilizer
+    permission_classes = [permissions.IsAuthenticated]
     
 # another way to do this using viewset 
 
