@@ -9,6 +9,8 @@ from rest_framework import permissions
 from rest_framework.decorators import api_view,permission_classes
  # Create your views here.
  
+def index(request):
+    return render(request,'index.html',{})
  # booking view 
 class bookingview(APIView):
     permission_classes = [permissions.IsAuthenticated]
