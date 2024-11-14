@@ -4,6 +4,9 @@ from rest_framework import generics
 from rest_framework.response import Response
 from .models import *
 from .serilizer import *
+from rest_framework import viewsets
+from rest_framework import permissions
+from rest_framework.decorators import api_view,permission_classes
  # Create your views here.
  
  # booking view 
@@ -35,7 +38,22 @@ class menuview(generics.ListCreateAPIView):
         if serlize.is_valid():
             serlize.save()
             return Response({"status":"succes","data":serlize.data})'''
+        
 class menusingleview(generics.UpdateAPIView,generics.DestroyAPIView,generics.ListAPIView):
     queryset = Menu_table.objects.all()
     serializer_class = menu_tableSerilizer
+    
+# another way to do this using viewset 
+
+class bookingviewset(viewsets.ModelViewSet):
+    queryset = Menu_table.objects.all()
+    serializer_class = menu_tableSerilizer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+@api_view()
+@permission_classes([permissions.IsAuthenticated])
+def msgview(request):
+    return Response({"msg":"This is authenticated class permission"})
+    
     
