@@ -2,7 +2,7 @@
 Project Littlelemon
 
 Required to test : 
-api/bookingview
+api/booking
 api/,menuview
 api/menu-single/2
 api/msg
